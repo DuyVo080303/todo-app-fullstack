@@ -9,7 +9,7 @@ export class AuthController {
     constructor(private authService: AuthService) { }
 
     @HttpCode(HttpStatus.OK)
-
+    
     @Post('register')
     register(@Body() registerDto: RegisterToDO) {
         return this.authService.register(registerDto.email, registerDto.password);
