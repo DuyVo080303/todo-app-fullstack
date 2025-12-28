@@ -1,31 +1,32 @@
-import { Controller, Body, Post, HttpCode, HttpStatus, Req } from '@nestjs/common';
+import { Controller, Body, Post, HttpCode, HttpStatus, Req, UseGuards } from '@nestjs/common';
+import { LoginTodoDto, RegisterTodoDto } from './dto';
 import { AuthService } from './auth.service';
-// import { LoginToDO } from './dto/login.dto';
-// import { RegisterToDO } from './dto/register.dto';
-
+import { JwtGuard } from './guard';
 
 @Controller('auth')
 export class AuthController {
     constructor(private authService: AuthService) { }
 
     @HttpCode(HttpStatus.OK)
-    
+
     // End point for Register/ Create a Route using HTTP Framework
     @Post('register')
-    // register(@Body() registerDto: RegisterToDO) {
-    //     return this.authService.register(registerDto.email, registerDto.password);
-    //     // return this.authService.register()
-    // } 
-    register(@Body() dto: any) {
-        console.log({dto})
-        // return this.authService.register(registerDto.email, registerDto.password);
-        return this.authService.register()
+    register(@Body() registerDto: RegisterTodoDto) {
+        return this.authService.register(registerDto)
     }
 
     // End point for Login
-    // @Post('login')
-    // logIn(@Body() logInDto: LoginToDO) {
-    //     // return this.authService.logIn(logInDto.email, logInDto.password)
-    //     return this.authService.logIn()
-    // }
+    @Post('login')
+    logIn(@Body() logInDto: LoginTodoDto) {
+        return this.authService.logIn(logInDto)
+    }
+
+    @Post('logout')
+    @UseGuards(JwtGuard)
+    async logOut() {
+        return this.authService.logOut()
+    }
+
+
+
 }

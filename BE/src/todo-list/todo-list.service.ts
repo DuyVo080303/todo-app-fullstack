@@ -1,41 +1,49 @@
-import { Injectable, Post } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
-import { CreateTodoListDto, DeleteTodoListDto, UpdateTodoListDto } from './dto';
+import { CreateTodoListDto, UpdateTodoListDto } from './dto';
 import { BadRequestException } from '@nestjs/common';
 
 @Injectable({})
-export class TodoListService {
 
+export class TodoListService {
     constructor(private prisma: PrismaService) { }
-    async create(createToDoList: CreateTodoListDto, userId: number) {
-        // Check if the user leave the title blank
-        if (!createToDoList.title) {
-            throw new BadRequestException('Title is required')
-        }
-        return await this.prisma.todoList.create({
-            data: {
-                title: createToDoList.title,
-                user: {
-                    connect: { id: userId }
-                }
-            }
+    async getToDoList(userId: number): Promise<any> {
+        return await this.prisma.todoList.findMany({
+            where: { userId },
         })
     }
 
-    // Update to the todo_list
-    // async update(updateTodoList: UpdateTodoListDto, userId: number, id:number) {
-    //     if(!updateTodoList.title){
-    //         throw new BadRequestException('Title is required')
-    //     }
-    //     return await this.prisma.todoList.update({
-    //         where:{id, userId},
-    //         data: {title: updateTodoList.title}
-    //     })
-    // }
-    async update(
-        id: number,
+    async getToDoListById(userId: number, todoListId: number): Promise<any> {
+        const todoListById = await this.prisma.todoList.findUnique({
+            where: { userId, id: todoListId },
+        })
+
+        if (!todoListById) throw new NotFoundException("The todolist is not available")
+
+        return todoListById
+    }
+
+    async createToDoList(createToDoList: CreateTodoListDto, userId: number) {
+        if (!createToDoList.title) {
+            throw new BadRequestException('Title is required')
+        }
+
+        const todoList = await this.prisma.todoList.create({
+            data: {
+                title: createToDoList.title,
+                user: {
+                    connect: { id: userId },
+                }
+            }
+        })
+
+        return todoList
+    }
+
+    async updateToDoListById(
+        userId: number,
         updateTodoList: UpdateTodoListDto,
-        userId: number
+        id: number,
     ) {
         return this.prisma.todoList.update({
             where: {
@@ -49,24 +57,18 @@ export class TodoListService {
     }
 
 
-
-    async remove(removeToDoList: DeleteTodoListDto, userId: number) {
-        return await this.prisma.todoList.delete({
-            where: { id: removeToDoList.id, userId }
+    async removeToDoListById(userId: number, todoListId: number) {
+        const todoListById = await this.prisma.todoList.findFirst({
+            where: { userId, id: todoListId },
         })
+
+        if (!todoListById) throw new NotFoundException("There is not todo list for remove")
+
+        return this.prisma.todoList.delete({
+            where: { id: todoListId },
+        });
+
     }
 
-    // Readlist
-    async findAll(userId: number): Promise<any> {
-        return await this.prisma.todoList.findMany({
-            where: { userId }
-        })
-    }
 
-    // Readitem
-    async findOne(id: number, userId: number) {
-        return await this.prisma.todoList.findFirst({
-            where: { id, userId }
-        })
-    }
 }
