@@ -1,10 +1,7 @@
-import { IsInt, IsNotEmpty, IsString } from "class-validator";
+import {IsOptional, IsString } from "class-validator";
 
 export class UpdateTodoListDto {
-    // @IsInt()
-    // id: number
-
     @IsString()
-    @IsNotEmpty()
-    title: string;
+    @IsOptional()
+    title?: string;
 }
