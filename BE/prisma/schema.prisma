@@ -31,6 +31,8 @@ model User {
   firstName String?
   lastName String?
 
+  refreshTokenHash String?   
+
   lists TodoList[]
 }
 
