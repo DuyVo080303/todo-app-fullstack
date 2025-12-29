@@ -4,7 +4,6 @@ import { CreateTodoListDto, UpdateTodoListDto } from './dto';
 import { BadRequestException } from '@nestjs/common';
 
 @Injectable({})
-
 export class TodoListService {
     constructor(private prisma: PrismaService) { }
     async getToDoList(userId: number): Promise<any> {
