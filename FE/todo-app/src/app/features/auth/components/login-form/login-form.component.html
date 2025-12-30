@@ -1,0 +1,32 @@
+<form [formGroup]='loginForm' (ngSubmit)="handleLogin()">
+    <label>
+        Email
+        <input type="text" formControlName=email />
+    </label>
+
+    <!-- Control flow incomponent and form validation -->
+    @if (email?.invalid && email?.touched) {
+    <div class="error">
+        @if (email?.hasError('required')) {
+        <small>Email is required</small>
+        } @else if (email?.hasError('email')) {
+        <small>Email is invalid</small>
+        }
+    </div>
+    }
+
+    <label>
+        Password
+        <input type="password" formControlName=password />
+    </label>
+
+    @if (password?.invalid && password?.touched) {
+    <div class="error">
+        @if (password?.hasError('required')) {
+        <small>Password is required</small>
+        } 
+    </div>
+    }
+
+    <app-form-button label="Login" type="submit"></app-form-button>
+</form>
