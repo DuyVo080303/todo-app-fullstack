@@ -20,6 +20,7 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
     }
 
     // Catch Error 401 and return to login page
+
     return next(requestToSend).pipe(
         catchError((err: any) => {
             if (err?.status === 401) {

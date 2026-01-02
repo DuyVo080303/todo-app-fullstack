@@ -39,7 +39,8 @@ export class TodoPageComponent implements OnInit {
   loadItems(listId: number) {
     this.itemService.getItems(listId).subscribe({
       next: (items) => {
-        this.items = [...items];
+        // this.items = [...items];
+        this.items = items;
         this.cdr.detectChanges();
       },
       error: (err) => console.log('getItems error', err),
@@ -51,7 +52,8 @@ export class TodoPageComponent implements OnInit {
   loadLists() {
     this.listService.getList().subscribe({
       next: (lists) => {
-        this.lists = [...lists];
+        // this.lists = [...lists];
+        this.lists = lists;
         this.cdr.detectChanges();
 
         if (this.selectedListId == null && this.lists.length) {
