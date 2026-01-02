@@ -32,6 +32,8 @@ export class AuthService {
                 lastName: registerDto.lastName,
             }
         })
+        // delete user.hash;
+
         return this.signToken(user.id,user.email);
     }
 
@@ -53,6 +55,7 @@ export class AuthService {
 
         return this.signToken(user.id,user.email);
     }
+
     logOut(){
         return {
             message: 'Loggedout out successfully'

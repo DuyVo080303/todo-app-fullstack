@@ -4,7 +4,7 @@ import { HttpClient, HttpResponse } from '@angular/common/http';
 import { environment } from '../../../../environments/environment';
 import { LoginDto } from '../models/login.dto';
 import { RegisterDto } from '../models/register.dto';
-import { tap, map } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 
 type LoginBody = { success: boolean; data: { access_token: string } };
 
@@ -23,13 +23,13 @@ export class AuthService {
 
     //2.
     //Syntax: http.post<Config>('/api/config', newConfig)
+    // Example: 
+    // http.get<Config>('/api/config', {observe: 'response'}).subscribe((res) => {
+    //   console.log('Response status:', res.status);
+    //   console.log('Body:', res.body);
+    // });
     // Server trả về 1 access có shape là { accessToken: string } response.accessToken
     // This method accept the loginDTo object and send it to the BE serve 
-    // login(data: LoginDto) {
-    //     return this.http.post<{ accessToken: string }>(`${this.baseUrl}/login`, data, {
-    //         observe: 'response',
-    //     });
-    // }
     login(data: LoginDto) {
         return this.http
             .post<LoginBody>(`${this.baseUrl}/login`, data, { observe: 'response' })

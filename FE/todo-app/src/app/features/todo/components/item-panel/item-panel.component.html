@@ -4,7 +4,7 @@
     } @else {
     <div class="items-panel__header">
         @if (!isEditing) {
-        <h1 class="items-panel__title">{{ selectedList?.name }}</h1>
+        <h1 class="items-panel__title">{{ selectedList.name}}</h1>
 
         <div class="items-panel__header-actions">
             <button type="button" class="items-panel__menu-btn" (click)="toggleMenu()">
