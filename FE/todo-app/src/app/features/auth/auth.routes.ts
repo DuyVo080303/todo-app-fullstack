@@ -7,3 +7,6 @@ export const AUTH_ROUTES: Routes = [
     { path: 'register', component: RegisterPageComponent },
     { path: '', redirectTo: 'login', pathMatch: 'full' },
 ];
+
+
+

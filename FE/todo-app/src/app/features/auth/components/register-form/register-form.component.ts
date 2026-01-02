@@ -5,7 +5,7 @@ import { passwordStrengthValidator } from '../../validators/passwordStrengthenVa
 import { passwordMatchValidator } from '../../validators/passwordMatchValidator';
 import { CommonModule } from '@angular/common';
 import { FormButtonComponent } from '../../../../shared/components/form-button/form-button.component';
-import { AuthService } from '../../../../core/services/authService';
+import { AuthService } from '../../services/authService';
 import { Router } from '@angular/router';
 import { RegisterDto } from '../../models/register.dto';
 import { RegisterFormDto } from '../../models/register-form.dto';
@@ -50,28 +50,29 @@ export class RegisterFormComponent {
   private router = inject(Router);
 
   handleRegister() {
-  if (this.registerForm.invalid) {
-    this.registerForm.markAllAsTouched();
-    return;
+    if (this.registerForm.invalid) {
+      this.registerForm.markAllAsTouched();
+      return;
+    }
+    const formValue = this.registerForm.value as RegisterFormDto
+
+    const payload: RegisterDto = {
+      email: this.registerForm.value.email!,
+      password: this.registerForm.value.password!,
+      firstName: this.registerForm.value.firstName!,
+      lastName: this.registerForm.value.lastName!,
+    };
+
+    this.authFeatureService.register(payload).subscribe({
+      next: (res) => {
+        console.log('STATUS:', res.status);
+        alert('Register Successfully');
+        this.router.navigate(['/auth/login']);
+      },
+      error: (err) => {
+        console.error(err);
+        alert('Register failed');
+      },
+    });
   }
-  const formValue = this.registerForm.value as RegisterFormDto
-
-  const payload: RegisterDto = {
-    email: this.registerForm.value.email!,
-    password: this.registerForm.value.password!,
-    firstName: this.registerForm.value.firstName!,
-    lastName: this.registerForm.value.lastName!,
-  };
-
-  this.authFeatureService.register(payload).subscribe({
-    next: () => {
-      alert('Register Successfully');
-      this.router.navigate(['/auth/login']);
-    },
-    error: (err) => {
-      console.error(err);
-      alert('Register failed');
-    },
-  });
-}
 }

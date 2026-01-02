@@ -1,32 +1,41 @@
-<form [formGroup]='loginForm' (ngSubmit)="handleLogin()">
-    <label>
-        Email
-        <input type="text" formControlName=email />
-    </label>
+<form class="login-form" [formGroup]="loginForm" (ngSubmit)="handleLogin()">
+    <!-- Email -->
+    <div class="login-form__field">
+        <label class="login-form__label" for="login-email">Email:</label>
 
-    <!-- Control flow incomponent and form validation -->
-    @if (email?.invalid && email?.touched) {
-    <div class="error">
-        @if (email?.hasError('required')) {
-        <small>Email is required</small>
-        } @else if (email?.hasError('email')) {
-        <small>Email is invalid</small>
+        <input id="login-email" class="login-form__input" type="text" formControlName="email"
+            placeholder="Enter your email" autocomplete="email" />
+        <!-- Control flow incomponent and form validation -->
+        @if (email?.invalid && email?.touched) {
+        <div class="login-form__error">
+            @if (email?.hasError('required')) {
+            <small>Email is required</small>
+            } @else if (email?.hasError('email')) {
+            <small>Email is invalid</small>
+            }
+        </div>
         }
     </div>
-    }
 
-    <label>
-        Password
-        <input type="password" formControlName=password />
-    </label>
+    <!-- Password -->
+    <div class="login-form__field">
+        <label class="login-form__label" for="login-password">Password:</label>
 
-    @if (password?.invalid && password?.touched) {
-    <div class="error">
-        @if (password?.hasError('required')) {
-        <small>Password is required</small>
-        } 
+        <input id="login-password" class="login-form__input" type="password" formControlName="password"
+            placeholder="Enter your password" autocomplete="current-password" />
+
+        @if (password?.invalid && password?.touched) {
+        <div class="login-form__error">
+            @if (password?.hasError('required')) {
+            <small>Password is required</small>
+            }
+        </div>
+        }
     </div>
-    }
 
-    <app-form-button label="Login" type="submit"></app-form-button>
+    <!-- Submit -->
+    <div class="login-form__actions">
+        <app-form-button label="Login" type="submit"></app-form-button>
+    </div>
 </form>
+

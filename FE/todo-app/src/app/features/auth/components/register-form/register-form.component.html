@@ -1,79 +1,94 @@
-<form [formGroup]='registerForm' (ngSubmit)="handleRegister()">
+<form class="register-form" [formGroup]='registerForm' (ngSubmit)="handleRegister()">
+    <div class="register-form__field">
+        <label class="register-form__label" for="register-first-name">
+            First Name
+        </label>
 
-    <label>
-        First Name
-        <input type="text" formControlName=firstName />
-    </label>
+        <input id=" register-first-name" type="text" class="register-form__input" formControlName=firstName />
 
-    <!-- Control flow incomponent and form validation -->
-    @if (firstName?.touched && firstName?.hasError('required')) {
-    <small class="error">First name is required</small>
-    }
-
-    <label>
-        Last Name
-        <input type="text" formControlName=lastName />
-    </label>
-
-    <!-- Control flow incomponent and form validation -->
-    @if (lastName?.touched && lastName?.hasError('required')) {
-    <small class="error">Last name is required</small>
-    }
-
-
-
-    <label>
-        Email
-        <input type="text" formControlName=email />
-    </label>
-
-    <!-- Control flow incomponent and form validation -->
-    @if (email?.invalid && email?.touched) {
-    <div class="error">
-        @if (email?.hasError('required')) {
-        <small>Email is required</small>
-        } @else if (email?.hasError('email')) {
-        <small>Email is invalid</small>
+        <!-- Control flow incomponent and form validation -->
+        @if (firstName?.touched && firstName?.hasError('required')) {
+        <small class="register-form__error">First name is required</small>
         }
     </div>
-    }
 
-    <label>
-        Password
-        <input type="password" formControlName=password />
-    </label>
 
-    @if (password?.invalid && password?.touched) {
-    <div class="error">
-        @if (password?.hasError('required')) {
-        <small>Password is required</small>
-        } @else if (
-        password?.hasError('minlength') ||
-        password?.hasError('uppercase') ||
-        password?.hasError('specialCharacter')
-        ) {
-        <small>Password should have at least 8 characters with one uppercase letter and a special character</small>
+    <div class="register-form__field">
+        <label class="register-form__label" for="register-last-name">
+            Last Name
+            
+        </label>
+
+        <input id ="register-last-name" type="text" class="register-form__input" formControlName=lastName />
+
+        <!-- Control flow incomponent and form validation -->
+        @if (lastName?.touched && lastName?.hasError('required')) {
+        <small class="register-form__error">Last name is required</small>
         }
     </div>
-    }
+    <div class="register-form__field">
+        <label class="register-form__label" for="register-mail">
+            Email
+        </label>
 
-    <label>
-        Confirm Password
-        <input type="password" formControlName=confirmPassword />
-    </label>
+        <input id="register-mail" type="text" class="register-form__input" formControlName=email />
 
-    @if (confirmPassword?.invalid && confirmPassword?.touched) {
-    <div class="error">
-        @if (confirmPassword?.hasError('required')) {
-        <small>Please write your confirm password</small>
-        } @else if (
-        confirmPassword?.hasError('mismatch')
-        ) {
-        <small>Your confirmed password is not match your password</small>
+        <!-- Control flow incomponent and form validation -->
+        @if (email?.invalid && email?.touched) {
+        <div class="register-form__error">
+            @if (email?.hasError('required')) {
+            <small class="register-form__error-text">Email is required</small>
+            } @else if (email?.hasError('email')) {
+            <small class="register-form__error-text">Email is invalid</small>
+            }
+        </div>
         }
     </div>
-    }
+    <div class="register-form__field">
+        <label class="register-form__label" for="register-password">
+            Password
+            
+        </label>
 
+        <input id="register-password" type="password" class="register-form__input" formControlName=password />
 
-    <app-form-button label="Register" type="submit"></app-form-button>
+        @if (password?.invalid && password?.touched) {
+        <div class="register-form__error">
+            @if (password?.hasError('required')) {
+            <small class="register-form__error-text">Password is required</small>
+            } @else if (
+            password?.hasError('minlength') ||
+            password?.hasError('uppercase') ||
+            password?.hasError('specialCharacter')
+            ) {
+            <small class="register-form__error-text">Password should have at least 8 characters with one uppercase
+                letter and a special character</small>
+            }
+        </div>
+        }
+    </div>
+    <div class="register-form__field">
+        <label class="register-form__label" for="register-confirm-password">
+            Confirm Password
+            
+        </label>
+
+        <input id ="register-confirm-password" type="password" class="register-form__input" formControlName=confirmPassword />
+
+        @if (confirmPassword?.invalid && confirmPassword?.touched) {
+        <div class="register-form__error">
+            @if (confirmPassword?.hasError('required')) {
+            <small class="register-form__error-text">Please write your confirm password</small>
+            } @else if (
+            confirmPassword?.hasError('mismatch')
+            ) {
+            <small class="register-form__error-text">Your confirmed password is not match your password</small>
+            }
+        </div>
+        }
+    </div>
+    <div class="register-form__actions">
+        <app-form-button label="Register" type="submit"></app-form-button>
+    </div>
+
 </form>

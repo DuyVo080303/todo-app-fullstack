@@ -1,0 +1,38 @@
+.register-form {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+
+    &__field {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+    }
+
+    &__label {
+        font-size: 14px;
+    }
+
+    &__input {
+        height: 34px;
+        padding: 0 10px;
+        border: 1px solid #9ca3af;
+        border-radius: 3px;
+        font-size: 15px;
+        outline: none;
+
+        &:focus {
+            border-color: #6b7280;
+        }
+    }
+
+    &__error {
+        color: #dc2626;
+        font-size: 12px;
+    }
+
+    &__actions {
+        margin-top: 4px;
+        text-align: center;
+    }
+}

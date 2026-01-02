@@ -9,14 +9,18 @@ async function bootstrap() {
   app.useGlobalPipes(new ValidationPipe({
     whitelist: true,
     forbidNonWhitelisted: true,
-    transform: true ,
+    transform: true,
     stopAtFirstError: true
   }
   ))
 
-  app.useGlobalInterceptors(
-    new TransformInterceptor
-  )
+  app.useGlobalInterceptors(new TransformInterceptor());
+
+  app.enableCors({
+    origin: 'http://localhost:4200',
+    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+  });
 
   await app.listen(process.env.PORT ?? 3000);
 }
