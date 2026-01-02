@@ -1,0 +1,88 @@
+<section class="items-panel">
+    @if(!selectedList) {
+    <div class="items-panel__empty"> Please select a list</div>
+    } @else {
+    <div class="items-panel__header">
+        @if (!isEditing) {
+        <h1 class="items-panel__title">{{ selectedList?.name }}</h1>
+
+        <div class="items-panel__header-actions">
+            <button type="button" class="items-panel__menu-btn" (click)="toggleMenu()">
+                Edit ▾
+            </button>
+
+            @if (menuOpen) {
+            <div class="items-panel__menu">
+                <button type="button" class="items-panel__menu-item" (click)="startEdit(); closeMenu()">
+                    Rename
+                </button>
+
+                <button type="button" class="items-panel__menu-item items-panel__menu-item--danger"
+                    (click)="deleteList.emit(); closeMenu()">
+                    Delete list
+                </button>
+            </div>
+            }
+        </div>
+        } @else {
+
+        <div class="items-panel__rename">
+            <input class="items-panel__rename-input" type="text" [(ngModel)]="renameTitle" placeholder="List name..."
+                (keydown.enter)="submitEdit()" (keydown.escape)="cancelEdit()" />
+
+            <div class="items-panel__create-actions">
+                <button type="button" class="items-panel__btn"
+                    (click)="submitEdit()">
+                    Save
+                </button>
+                <button type="button" class="items-panel__btn" (click)="cancelEdit()">
+                    Cancel
+                </button>
+            </div>
+        </div>
+
+        }
+    </div>
+    
+    <div class="items-panel__toolbar">
+        @if (!isCreating) {
+        <button type="button" class="items-panel__create-btn" (click)="startCreate()" [disabled]="!selectedList">
+            New Items +
+        </button>
+        } @else {
+        <div class="items-panel__create">
+            <input class="items-panel__input" type="text" placeholder="Title..." [(ngModel)]="newTitle"
+                (keydown.enter)="submitCreate()" (keydown.escape)="cancelCreate()" />
+
+            <div class="items-panel__create-row">
+                <label class="items-panel__label">
+                    Due date
+                    <input class="items-panel__input" type="date" [(ngModel)]="newDueDate" />
+                </label>
+
+                <label class="items-panel__label">
+                    Priority
+                    <select class="items-panel__select" [(ngModel)]="newPriority">
+                        <option value="LOW">Low</option>
+                        <option value="MEDIUM">Medium</option>
+                        <option value="HIGH">High</option>
+                    </select>
+                </label>
+            </div>
+
+            <div class="items-panel__create-actions">
+                <button type="button" class="items-panel__btn" (click)="submitCreate()">Create</button>
+                <button type="button" class="items-panel__btn items-panel__btn--ghost"
+                    (click)="cancelCreate()">Cancel</button>
+            </div>
+        </div>
+        }
+    </div>
+    <div class="items-panel__list">
+        @for (item of getItems; track item.id) {
+        <app-item-row class="items-panel__row" [item]="item" (toggleDone)="toggleItemDone.emit($event)"
+            (editItem)="editItem.emit($event)" (deleteItem)="deleteItem.emit($event)" />
+        }
+    </div>
+    }
+</section>

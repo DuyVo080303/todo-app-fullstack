@@ -10,8 +10,5 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./login-page.component.scss'],
 })
 export class LoginPageComponent {
-  constructor (private router:Router) {}
-  goToRegister(){
-    this.router.navigate(['/auth/register'])
-  }
+
 }

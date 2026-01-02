@@ -11,7 +11,7 @@ export class UpdateoDoItemDto {
         message: 'priority must be HIGH, MEDIUM, or LOW',
     })
     @IsOptional()
-    priorprity?: TodoPriority
+    priority?: TodoPriority
 
     @IsOptional()
     @Transform(({ value }) => {

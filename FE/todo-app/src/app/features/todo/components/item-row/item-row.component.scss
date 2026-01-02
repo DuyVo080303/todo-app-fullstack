@@ -1,0 +1,110 @@
+.items-row {
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 14px;
+    background: white;
+
+    &__top {
+        display: grid;
+        grid-template-columns: 24px 1fr 120px;
+        gap: 12px;
+    }
+
+    &__title {
+
+        font-weight: 700;
+    }
+
+    &__due {
+        text-align: right;
+        color: #6b7280;
+    }
+
+    &__meta {
+        margin-top: 10px;
+        display: flex;
+        align-items: center;
+    }
+
+    &__chip {
+        display: inline-block;
+        padding: 6px 10px;
+        border: 1px solid #e5e7eb;
+        border-radius: 12px;
+        background: #f9fafb;
+    }
+
+    .high {
+        background: #fef2f2;
+        border-color: #fecaca;
+        color: #991b1b;
+    }
+
+    .medium {
+        background: #fffbeb;
+        border-color: #fde68a;
+        color: #92400e;
+    }
+
+    .low {
+        background: #ecfdf5;
+        border-color: #a7f3d0;
+        color: #065f46;
+    }
+
+    &__actions {
+        margin-left: auto;
+        display: flex;
+        gap: 10px;
+    }
+
+    &__chip--done {
+        background: #ecfdf5;
+        border-color: #a7f3d0;
+        color: #065f46;
+        font-weight: 600;
+    }
+
+    // Edit form 
+    &__edit {
+        background: #ffffff;
+        border: 1px solid #e5e7eb;
+        border-radius: 12px;
+        padding: 12px;
+        display: grid;
+        gap: 10px;
+    }
+
+    &__edit-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+
+        @media (max-width: 640px) {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    &__label {
+        display: grid;
+        gap: 6px;
+        font-size: 13px;
+        color: #374151;
+    }
+
+    &__input,
+    &__select {
+        padding: 10px 12px;
+        border: 1px solid #e5e7eb;
+        border-radius: 12px;
+        outline: none;
+        font-size: 14px;
+        background: #ffffff;
+    }
+
+    &__input:focus,
+    &__select:focus {
+        border-color: #cbd5e1;
+    }
+
+}

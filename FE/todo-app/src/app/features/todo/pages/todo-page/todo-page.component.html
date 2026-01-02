@@ -1,0 +1,30 @@
+<div class="todo-page">
+    <header class="todo-page__topbar">
+        <div class="todo-page__brand">Todo App</div>
+
+        <div class="todo-page__topbar-right">
+            <mat-icon class="todo-page__avatar">person</mat-icon>
+            <button class="todo-page__logout-btn" type="button" (click)="onLogout()">Logout</button>
+        </div>
+    </header>
+
+    <main class="todo-page__content">
+        <app-list-sidebar 
+        [lists]="lists" 
+        [seletedListById]="selectedListId" 
+        (selectList)="onSelectList($event)"
+        (createList)="onCreateList($event)"
+        ></app-list-sidebar>
+
+        <app-item-panel
+        [selectedList]="selectedList" 
+        [items]="items" 
+        (createItem)="onCreateItem($event)"
+        (editList)="onUpdateList($event)"
+        (deleteList)="selectedListId !== null && onDeleteList(selectedListId)"
+        (editItem)="onUpdateItem($event)"
+        (deleteItem)="onDeleteItem($event)" 
+        (toggleItemDone)="onToggleItemDone($event)"
+        ></app-item-panel>
+    </main>
+</div>

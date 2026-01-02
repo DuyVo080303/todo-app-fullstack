@@ -1,0 +1,50 @@
+<div class="items-row">
+    <div class="items-row__top">
+        <input class="items-row__checkbox" type="checkbox" [checked]="item.completed"
+            (change)="onToggleDone($any($event.target).checked)" />
+        <div class="items-row__title">{{ item.title }}</div>
+        <div class="items-row__due">{{ item.dueDate | date:'yyyy - MM - dd' }}</div>
+    </div>
+
+    <div class="items-row__meta">
+        <span class="items-row__chip" [class.high]="item.priority==='High'" [class.medium]="item.priority==='Medium'"
+            [class.low]="item.priority==='Low'">
+            Priority: {{ item.priority }}
+        </span>
+
+        <div class="items-row__actions">
+            @if (!isEditing) {
+            <button class="items-row__chip" type="button" (click)="onEdit()">Edit</button>
+            <button class="items-row__chip" type="button" (click)="onDelete()">Delete</button>
+            } @else {
+            <button class="items-row__chip items-row__chip--done" type="button" (click)="onSaveEdit()">Save</button>
+            <button class="items-row__chip" type="button" (click)="onCancelEdit()">Cancel</button>
+            }
+            @if (item.completed) {
+            <button class="items-row__chip items-row__chip--done" type="button">✓ Done</button>
+            }
+        </div>
+    </div>
+
+    @if (isEditing) {
+    <div class="items-row__edit">
+        <input class="items-row__input" type="text" [(ngModel)]="editTitle" placeholder="Title..." />
+
+        <div class="items-row__edit-row">
+            <label class="items-row__label">
+                Due date
+                <input class="items-row__input" type="date" [(ngModel)]="editDueDate" />
+            </label>
+
+            <label class="items-row__label">
+                Priority
+                <select class="items-row__select" [(ngModel)]="editPriority">
+                    <option value="LOW">Low</option>
+                    <option value="MEDIUM">Medium</option>
+                    <option value="HIGH">High</option>
+                </select>
+            </label>
+        </div>
+    </div>
+    }
+</div>

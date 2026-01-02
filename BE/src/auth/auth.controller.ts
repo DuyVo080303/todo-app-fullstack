@@ -26,7 +26,4 @@ export class AuthController {
     async logOut() {
         return this.authService.logOut()
     }
-
-
-
 }

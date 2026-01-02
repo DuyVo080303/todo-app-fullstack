@@ -3,7 +3,7 @@ import { Component, inject } from '@angular/core';
 import { ReactiveFormsModule, Validators } from '@angular/forms';
 import { FormGroup, FormControl } from '@angular/forms';
 import { FormButtonComponent } from '../../../../shared/components/form-button/form-button.component';
-import { AuthService } from '../../../../core/services/authService';
+import { AuthService } from '../../services/authService';
 import { Router } from '@angular/router';
 @Component({
   selector: 'app-login-form',
@@ -25,6 +25,8 @@ export class LoginFormComponent {
     return this.loginForm.get('password');
   }
 
+  // Connect the server with the loginForm component
+  // Call the service (inject) to pass the user data to the sever (*)
   private authFeatureService = inject(AuthService);
   private router = inject(Router);
 
@@ -39,8 +41,10 @@ export class LoginFormComponent {
       password: this.loginForm.value.password!,
     };
 
+    // (*) --> subscribe the observable that is returned (can get the response data or error)
     this.authFeatureService.login(loginData).subscribe({
-      next: () => {
+      next: (res) => {
+        console.log('STATUS:', res.status);
         this.router.navigate(['/todo_list']);
       },
       error: () => {
@@ -49,3 +53,7 @@ export class LoginFormComponent {
     });
   }
 }
+
+
+
+

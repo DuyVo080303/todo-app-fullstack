@@ -101,7 +101,7 @@ export class TodoItemService {
 
             data: {
                 title: updateToDoItem.title,
-                priority: updateToDoItem.priorprity,
+                priority: updateToDoItem.priority,
                 completed: updateToDoItem.completed,
                 dueDate: updateToDoItem.dueDate,
             }

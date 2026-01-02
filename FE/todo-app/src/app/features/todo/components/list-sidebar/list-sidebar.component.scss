@@ -1,0 +1,138 @@
+.list-sidebar {
+    padding: 16px;
+    border-right: 1px solid e5e7eb;
+    background: #ffffff;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    height: 100%;
+
+    &__search {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding-left: 10px;
+        padding-right: 10px;
+        padding-top: 8px;
+        padding-bottom: 8px;
+        border: 1px solid #e5e7eb;
+        border-radius: 10px;
+        background: #f9fafb;
+    }
+
+    &__search-icon {
+        display: flex;
+        padding-top: 8px;
+        font-size: 15px;
+        opacity: 0.6;
+    }
+
+    &__search-input {
+        border: none;
+        outline: none;
+        background: transparent;
+        width: 100%;
+        font-size: 15px;
+    }
+
+    &__new-btn {
+        border: 1px solid #e5e7eb;
+        background: rgb(231, 230, 230);
+        color: rgb(44, 44, 44);
+        width: auto;
+        display: inline-flex;
+        border-radius: 4px;
+        text-align: left;
+        align-self: flex-start;
+        padding: 4px 10px;
+        cursor: pointer;
+        font-size: 15px;
+    }
+
+    &__list {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        overflow: auto;
+        padding-right: 4px;
+    }
+
+    &__row {
+        width: 100%;
+        border: 1px solid #e5e7eb;
+        background: #ffffff;
+        border-radius: 10px;
+        padding: 10px 12px;
+
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        cursor: pointer;
+        text-align: left;
+
+        &:hover {
+            background: #f9fafb;
+        }
+
+        &--active {
+            border-color: #2563eb;
+            background: #eef2ff;
+        }
+    }
+
+    &__name {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-weight: 600;
+        line-height: 1.2;
+    }
+
+    &__count {
+        font-weight: 400;
+        opacity: 0.7;
+    }
+
+    &__show-arrow {
+        display: inline-flex;
+        font-size: 18px; // tùy chỉnh cho gọn
+        width: 18px;
+        height: 18px;
+        line-height: 18px;
+        opacity: 0.8;
+    }
+
+    .list-sidebar__create {
+        margin-top: 10px;
+        display: grid;
+        gap: 10px;
+    }
+
+    .list-sidebar__input {
+        padding: 10px 12px;
+        border-radius: 12px;
+        border: 1px solid #e5e7eb;
+        outline: none;
+        background: transparent;
+        font-size: 15px;
+    }
+
+    .list-sidebar__create-actions {
+        display: flex;
+        gap: 8px;
+    }
+
+    .list-sidebar__btn {
+        padding: 8px 10px;
+        border-radius: 10px;
+        border: 1px solid #e5e7eb;
+        background: #fff;
+        cursor: pointer;
+    }
+
+    .list-sidebar__btn--ghost {
+        background: transparent;
+    }
+
+}

@@ -1,0 +1,39 @@
+<aside class="list-sidebar">
+    <div class="list-sidebar__search">
+        <mat-icon class="list-sidebar__search-icon">search</mat-icon>
+        <!-- Two way binding -->
+        <input class="list-sidebar__search-input" [(ngModel)]="search" name="search" placeholder="Search" />
+    </div>
+
+    @if (!isCreating) {
+    <button type="button" class="list-sidebar__new-btn" (click)="startCreate()">
+        + New List
+    </button>
+    } @else {
+    <div class="list-sidebar__create">
+        <input class="list-sidebar__input" type="text" placeholder="List name..." [(ngModel)]="newListTitle"
+            (keydown.enter)="submitCreate()" (keydown.escape)="cancelCreate()" />
+
+        <div class="list-sidebar__create-actions">
+            <button type="button" class="list-sidebar__btn" (click)="submitCreate()">Create</button>
+            <button type="button" class="list-sidebar__btn list-sidebar__btn--ghost"
+                (click)="cancelCreate()">Cancel</button>
+        </div>
+    </div>
+    }
+
+    <div class="list-sidebar__list">
+        @for (list of lists; track list.id) {
+        <button type="button" class="list-sidebar__row" [class.list-sidebar__row--active]="list.id === seletedListById"
+            (click)="onSelect(list.id)">
+
+            <div class="list-sidebar__name">
+                {{list.name}} <span class="list-sidebar__count"> ({{list.count}})</span>
+            </div>
+            <mat-icon class="list-sidebar__show-arrow">arrow_forward_ios</mat-icon>
+        </button>
+        }
+    </div>
+</aside>
+
+
