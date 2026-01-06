@@ -56,11 +56,7 @@ export class AuthService {
         return this.signToken(user.id,user.email);
     }
 
-    logOut(){
-        return {
-            message: 'Loggedout out successfully'
-        }
-    }
+
 
     async signToken (userId: number, email:string): Promise<{access_token: string}>{
 
@@ -78,6 +74,8 @@ export class AuthService {
             access_token:token
         };
     }
+
+    // Define response đẻ cho consistencty 
 }
 
 

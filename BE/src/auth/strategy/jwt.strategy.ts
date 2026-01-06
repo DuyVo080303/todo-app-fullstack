@@ -3,7 +3,6 @@ import { Injectable } from '@nestjs/common';
 import { ExtractJwt, Strategy } from 'passport-jwt';
 import { ConfigService } from '@nestjs/config';
 import { PrismaService } from 'src/prisma/prisma.service';
-import { UnauthorizedException } from '@nestjs/common';
 export type JwtPayload = { sub: number, email: string }
 
 @Injectable()

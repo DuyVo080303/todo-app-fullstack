@@ -23,12 +23,12 @@
     }
 
     <div class="list-sidebar__list">
-        @for (list of lists; track list.id) {
-        <button type="button" class="list-sidebar__row" [class.list-sidebar__row--active]="list.id === seletedListById"
+        @for (list of filteredLists; track list.id) {
+        <button type="button" class="list-sidebar__row" [class.list-sidebar__row--active]="list.id === selectedListById"
             (click)="onSelect(list.id)">
 
             <div class="list-sidebar__name">
-                {{list.name}} <span class="list-sidebar__count"> ({{list.count}})</span>
+                {{list.name}}
             </div>
             <mat-icon class="list-sidebar__show-arrow">arrow_forward_ios</mat-icon>
         </button>

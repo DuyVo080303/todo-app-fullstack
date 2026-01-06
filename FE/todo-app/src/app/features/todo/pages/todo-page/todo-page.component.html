@@ -11,8 +11,8 @@
     <main class="todo-page__content">
         <app-list-sidebar 
         [lists]="lists" 
-        [seletedListById]="selectedListId" 
-        (selectList)="onSelectList($event)"
+        [selectedListById]="selectedListId" 
+        (selectList)=" onSelectList($event)"
         (createList)="onCreateList($event)"
         ></app-list-sidebar>
 
@@ -21,7 +21,7 @@
         [items]="items" 
         (createItem)="onCreateItem($event)"
         (editList)="onUpdateList($event)"
-        (deleteList)="selectedListId !== null && onDeleteList(selectedListId)"
+        (deleteList)="onDeleteList(selectedListId!)"
         (editItem)="onUpdateItem($event)"
         (deleteItem)="onDeleteItem($event)" 
         (toggleItemDone)="onToggleItemDone($event)"

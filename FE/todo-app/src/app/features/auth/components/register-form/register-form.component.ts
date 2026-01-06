@@ -54,7 +54,6 @@ export class RegisterFormComponent {
       this.registerForm.markAllAsTouched();
       return;
     }
-    const formValue = this.registerForm.value as RegisterFormDto
 
     const payload: RegisterDto = {
       email: this.registerForm.value.email!,

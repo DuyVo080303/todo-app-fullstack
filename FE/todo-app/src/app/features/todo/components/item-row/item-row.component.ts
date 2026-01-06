@@ -16,11 +16,10 @@ export class ItemRowComponent {
   @Output() deleteItem = new EventEmitter<number>();
   @Output() toggleDone = new EventEmitter<{ id: number; completed: boolean }>();
 
-
+  // UI State
   isEditing = false;
-
   editTitle = '';
-  editDueDate = '';      // 'YYYY-MM-DD'
+  editDueDate = '';      
   editPriority: PriorityApi = 'LOW';
 
   private toYmd(date: string | Date): string {

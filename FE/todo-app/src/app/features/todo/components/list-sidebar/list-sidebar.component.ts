@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { TodoList } from '../../models';
+import { TodoItem } from '../../models';
 import { FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 
@@ -14,17 +15,30 @@ import { MatIconModule } from '@angular/material/icon';
 })
 export class ListSidebarComponent {
   @Input() lists: TodoList[] = []
-  @Input() seletedListById: number | null = null
+  @Input() selectedListById: number | null = null
+
 
   @Output() selectList = new EventEmitter<number>()
   @Output() createList = new EventEmitter<string>()
 
+  // UI State
   search = ''
   isCreating = false;
+  isSearchChing = true;
   newListTitle = '';
 
+  // onSelect(id: number) {
+  //   this.selectList.emit(id)
+  // }
+  
   onSelect(id: number) {
     this.selectList.emit(id)
+  }
+
+  get filteredLists(){
+    const term = this.search.toLowerCase().trim();
+    if(!term) return this.lists
+    return this.lists.filter(list => list.name?.toLowerCase().includes(term))
   }
 
 
@@ -40,8 +54,7 @@ export class ListSidebarComponent {
   submitCreate() {
     const title = this.newListTitle.trim();
     if (!title) return;
-    this.createList.emit(title);   
+    this.createList.emit(title);
     this.cancelCreate();
   }
-
 }

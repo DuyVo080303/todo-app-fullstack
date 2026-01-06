@@ -7,6 +7,7 @@ export interface TodoItem {
     title: string;
     dueDate: string | Date;      
     priority: PriorityUi;
+    listId: number;
     completed?: boolean;
 };
 

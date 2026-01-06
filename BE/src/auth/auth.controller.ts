@@ -20,10 +20,4 @@ export class AuthController {
     logIn(@Body() logInDto: LoginTodoDto) {
         return this.authService.logIn(logInDto)
     }
-
-    @Post('logout')
-    @UseGuards(JwtGuard)
-    async logOut() {
-        return this.authService.logOut()
-    }
 }

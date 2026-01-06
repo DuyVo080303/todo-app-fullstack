@@ -21,6 +21,7 @@ export class ItemPanelComponent {
   @Output() deleteItem = new EventEmitter<number>();
   @Output() toggleItemDone = new EventEmitter<{ id: number; completed: boolean }>();
 
+  // UI State
   menuOpen = false;
   isCreating = false;
   isEditing = false;

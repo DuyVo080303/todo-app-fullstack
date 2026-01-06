@@ -3,7 +3,8 @@ import { environment } from '../../../../environments/environment';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { ApiResponse } from '../models';
 import { TodoItemApi, PriorityApi, PriorityUi } from '../models';
-import { map } from 'rxjs';
+import { map, tap, catchError } from 'rxjs';
+import { throwError } from 'rxjs';
 
 
 const toUiPriority = (p: PriorityApi): PriorityUi => {
@@ -30,9 +31,11 @@ export class TodoItemService {
           dueDate: new Date(item.dueDate),
           priority: toUiPriority(item.priority),
           completed: item.completed,
+          listId:listId,
         })))
       );
   }
+
 
   createItems(listId: number, body: Partial<TodoItemApi>) {
     return this.http
@@ -67,10 +70,10 @@ export class TodoItemService {
   }
 
   deleteItem(itemId: number) {
-  return this.http
-    .delete(`${this.baseUrl}/todo_item/${itemId}`, { observe: 'response' })
-    .pipe(
-      map((res: HttpResponse<any>) => ({ status: res.status }))
-    );
-}
+    return this.http
+      .delete(`${this.baseUrl}/todo_item/${itemId}`, { observe: 'response' })
+      .pipe(
+        map((res: HttpResponse<any>) => ({ status: res.status }))
+      );
+  }
 }
